@@ -1,6 +1,7 @@
 import express, {Request, Response} from "express";
 import morgan from "morgan";
 import cors from "cors"
+import {createRoutes} from "./route";
 
 export const createServer = () => {
     const app = express()
@@ -15,5 +16,6 @@ export const createServer = () => {
         res.json({ok: true});
     });
 
+    createRoutes(app);
     return app;
 }
