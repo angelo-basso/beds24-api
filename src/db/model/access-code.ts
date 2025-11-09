@@ -20,7 +20,7 @@ export default class AccessCode extends Model<InferAttributes<AccessCode>, Infer
     @Column({
         type: DataType.UUIDV4
     })
-    declare uuid: CreationOptional<string>;
+    declare id: CreationOptional<string>;
 
     @Unique
     @AllowNull(false)
@@ -33,9 +33,12 @@ export default class AccessCode extends Model<InferAttributes<AccessCode>, Infer
     declare guestName: string;
 
     @AllowNull(false)
-    @IsEmail
     @Column
-    declare guestEmail: string;
+    declare keypadId: string;
+
+    @AllowNull(false)
+    @Column
+    declare encryptedCode: string;
 
     @AllowNull(false)
     @Column
@@ -55,4 +58,18 @@ export default class AccessCode extends Model<InferAttributes<AccessCode>, Infer
     @UpdatedAt
     declare updatedAt: CreationOptional<Date>;
 
+    toJSON(){
+        return{bookingId:this.bookingId,guestName:this.guestName,validFrom:this.validFrom,validUntil:this.validUntil,status:this.status};
+    }
+
+}
+
+export interface IAccessCode {
+    bookingId: number,
+    guestName: string,
+    keypadId: string,
+    encryptedCode: string,
+    validFrom: Date,
+    validUntil: Date,
+    status: string
 }
