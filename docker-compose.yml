@@ -20,13 +20,14 @@ services:
       - swbot_connector
   postgres:
     image: postgres:15
-    container_name: postgres
+    container_name: beds24-api_postgres
     environment:
       POSTGRES_DB: ${POSTGRES_DB:-postgres}
       POSTGRES_USER: ${POSTGRES_USER}
       POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     volumes:
       - db-data:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
     ports:
       - "5434:5432"
     networks:
