@@ -2,6 +2,7 @@ import express, {Request, Response} from "express";
 import morgan from "morgan";
 import cors from "cors"
 import {createRoutes} from "./route";
+import errorHandler from "./middleware/error-handler";
 
 export const createServer = () => {
     const app = express()
@@ -17,5 +18,8 @@ export const createServer = () => {
     });
 
     createRoutes(app);
+
+    app.use(errorHandler)
+
     return app;
 }
