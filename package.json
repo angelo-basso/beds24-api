@@ -9,7 +9,10 @@
   "private": false,
   "scripts": {
     "dev": "dotenv -- tsc-watch --sourceMap --onsuccess \"node --enable-source-maps dist/index.js\"",
-    "build": "tsc"
+    "build": "tsc",
+    "migrate": "dotenv -- node migrate up",
+    "migrate:rollback": "dotenv -- node migrate down",
+    "migration:create": "dotenv -- node migrate create"
   },
   "dependencies": {
     "cors": "^2.8.5",
@@ -20,7 +23,9 @@
     "postgres": "^3.4.7",
     "reflect-metadata": "^0.2.2",
     "sequelize": "^6.37.7",
-    "sequelize-typescript": "^2.1.6"
+    "sequelize-typescript": "^2.1.6",
+    "ts-node": "^10.9.2",
+    "umzug": "^3.8.2"
   },
   "devDependencies": {
     "@tsconfig/node22": "^22.0.2",
