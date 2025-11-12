@@ -34,7 +34,7 @@ export default class PropertyRoom extends Model<InferAttributes<PropertyRoom>, I
     @ForeignKey(() => Property)
     @AllowNull(false)
     @Column({type: DataTypes.UUIDV4})
-    declare propertyId: number
+    declare propertyUuid: string
 
     @CreatedAt
     declare createdAt: CreationOptional<Date>;

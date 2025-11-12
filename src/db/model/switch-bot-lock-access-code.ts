@@ -1,16 +1,20 @@
 import {
-    Column,
-    Model,
-    Table,
-    DataType,
-    Unique,
-    CreatedAt,
-    UpdatedAt,
     AllowNull,
-    Validate,
-    PrimaryKey, AutoIncrement, IsEmail
+    AutoIncrement,
+    BelongsTo,
+    Column,
+    CreatedAt,
+    DataType,
+    ForeignKey,
+    Model,
+    PrimaryKey,
+    Table,
+    Unique,
+    UpdatedAt,
+    Validate
 } from "sequelize-typescript";
-import {CreationOptional, InferAttributes, InferCreationAttributes} from "sequelize";
+import {CreationOptional, DataTypes, InferAttributes, InferCreationAttributes} from "sequelize";
+import Keypad from "./keypad";
 
 @Table({tableName: "switch_bot_lock_access_code", modelName: "SwitchBotLockAccessCode", schema: "app", underscored: true})
 export default class SwitchBotLockAccessCode extends Model<InferAttributes<SwitchBotLockAccessCode>, InferCreationAttributes<SwitchBotLockAccessCode>> {
@@ -32,8 +36,9 @@ export default class SwitchBotLockAccessCode extends Model<InferAttributes<Switc
     @Column
     declare guestName: string;
 
+    @ForeignKey(()=>Keypad)
     @AllowNull(false)
-    @Column
+    @Column({type:DataTypes.UUIDV4})
     declare keypadUuid: string;
 
     @AllowNull(false)
@@ -57,6 +62,9 @@ export default class SwitchBotLockAccessCode extends Model<InferAttributes<Switc
 
     @UpdatedAt
     declare updatedAt: CreationOptional<Date>;
+
+    @BelongsTo(()=>Keypad)
+    declare keypad?:InferAttributes<Keypad>;
 
     toJSON(){
         return{bookingId:this.bookingId,guestName:this.guestName,validFrom:this.validFrom,validUntil:this.validUntil,status:this.status};
