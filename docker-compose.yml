@@ -1,23 +1,23 @@
 services:
-  beds24-api:
-    container_name: beds24-api
-    build: .
-    ports:
-      - '3000:3000'
-    environment:
-      - DATABASE_URL=${DATABASE_URL}
-      - REDIS_URL=${REDIS_URL}
-      - SWITCHBOT_TOKEN=${SWITCHBOT_TOKEN}
-      - SWITCHBOT_SECRET=${SWITCHBOT_SECRET}
-      - WEBHOOK_SECRET=${WEBHOOK_SECRET}
-      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
-      - NODE_ENV=${APP_NODE_ENV:-production}
-      - PORT=${APP_PORT:-3000}
-    depends_on:
-      - postgres
-    #          - redis
-    networks:
-      - swbot_connector
+#  beds24-hub-api:
+#    container_name: beds24-api_app
+#    build: .
+#    ports:
+#      - '3000:3000'
+#    environment:
+#      - DATABASE_URL=${DATABASE_URL}
+#      - REDIS_URL=${REDIS_URL}
+#      - SWITCHBOT_TOKEN=${SWITCHBOT_TOKEN}
+#      - SWITCHBOT_SECRET=${SWITCHBOT_SECRET}
+#      - WEBHOOK_SECRET=${WEBHOOK_SECRET}
+#      - ENCRYPTION_KEY=${ENCRYPTION_KEY}
+#      - NODE_ENV=${APP_NODE_ENV:-production}
+#      - PORT=${APP_PORT:-3000}
+#    depends_on:
+#      - postgres
+#    #          - redis
+#    networks:
+#      - swbot_connector
   postgres:
     image: postgres:15
     container_name: beds24-api_postgres
@@ -34,7 +34,7 @@ services:
       - swbot_connector
 #  redis:
 #    image: redis:7-alpine
-#    container_name: redis
+#    container_name: beds24-api_redis
 #    ports:
 #      - "6379:6379"
 #    networks:

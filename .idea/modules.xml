@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/beds24-api.iml" filepath="$PROJECT_DIR$/.idea/beds24-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/beds24-hub-api.iml" filepath="$PROJECT_DIR$/.idea/beds24-hub-api.iml" />
     </modules>
   </component>
 </project>

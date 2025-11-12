@@ -1,5 +1,5 @@
 {
-  "name": "beds24-api",
+  "name": "beds24-hub-api",
   "version": "0.0.1",
   "description": "api hub to allow connection between different services and beds24",
   "main": "app.js",
