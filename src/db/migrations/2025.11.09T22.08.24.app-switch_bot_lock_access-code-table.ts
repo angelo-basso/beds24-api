@@ -2,13 +2,11 @@ import {Migration} from "../../umzug";
 import {DataTypes} from "sequelize";
 import {Sequelize} from "sequelize-typescript";
 
-const accessCodeTableSchemaName = "switch_bot"
-const accessCodeSequelizeTable = {schema: accessCodeTableSchemaName, tableName: "access_code"}
+const table = {schema: "app", tableName: "switch_bot_lock_access_code"}
 
 export const up: Migration = async ({context: sequelize}) => {
-    await sequelize.getQueryInterface().createSchema(accessCodeTableSchemaName);
-    await sequelize.getQueryInterface().createTable(accessCodeSequelizeTable, {
-        id: {
+    await sequelize.getQueryInterface().createTable(table, {
+        uuid: {
             type: DataTypes.UUID,
             allowNull: false,
             primaryKey: true,
@@ -22,9 +20,13 @@ export const up: Migration = async ({context: sequelize}) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        keypad_id: {
-            type: DataTypes.STRING,
-            allowNull: false
+        keypad_uuid: {
+            type: DataTypes.UUID,
+            allowNull: false,
+            references: {
+                model: {schema: "switch_bot_entity", tableName: "keypad"},
+                key: "uuid",
+            }
         },
         encrypted_code: {
             type: DataTypes.STRING,
@@ -56,6 +58,6 @@ export const up: Migration = async ({context: sequelize}) => {
     });
 }
 export const down: Migration = async ({context: sequelize}) => {
-    await sequelize.getQueryInterface().dropTable(accessCodeSequelizeTable);
+    await sequelize.getQueryInterface().dropTable(table);
 
 }
