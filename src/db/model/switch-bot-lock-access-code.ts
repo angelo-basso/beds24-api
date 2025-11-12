@@ -12,15 +12,15 @@ import {
 } from "sequelize-typescript";
 import {CreationOptional, InferAttributes, InferCreationAttributes} from "sequelize";
 
-@Table({tableName: "access_code", modelName: "AccessCode", schema: "switch_bot", underscored: true})
-export default class AccessCode extends Model<InferAttributes<AccessCode>, InferCreationAttributes<AccessCode>> {
+@Table({tableName: "switch_bot_lock_access_code", modelName: "SwitchBotLockAccessCode", schema: "app", underscored: true})
+export default class SwitchBotLockAccessCode extends Model<InferAttributes<SwitchBotLockAccessCode>, InferCreationAttributes<SwitchBotLockAccessCode>> {
 
     @PrimaryKey
     @AutoIncrement
     @Column({
         type: DataType.UUIDV4
     })
-    declare id: CreationOptional<string>;
+    declare uuid: CreationOptional<string>;
 
     @Unique
     @AllowNull(false)
@@ -34,7 +34,7 @@ export default class AccessCode extends Model<InferAttributes<AccessCode>, Infer
 
     @AllowNull(false)
     @Column
-    declare keypadId: string;
+    declare keypadUuid: string;
 
     @AllowNull(false)
     @Column
@@ -64,10 +64,10 @@ export default class AccessCode extends Model<InferAttributes<AccessCode>, Infer
 
 }
 
-export interface IAccessCode {
+export interface ISwitchBotLockAccessCode {
     bookingId: number,
     guestName: string,
-    keypadId: string,
+    keypadUuid: string,
     encryptedCode: string,
     validFrom: Date,
     validUntil: Date,

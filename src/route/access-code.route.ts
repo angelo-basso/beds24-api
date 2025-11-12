@@ -1,6 +1,6 @@
 import {Express, Request, Response} from "express";
 import repository from "../db/repository";
-import {IAccessCode} from "../db/model/access-code";
+import {ISwitchBotLockAccessCode} from "../db/model/switch-bot-lock-access-code";
 
 export const accessCodeRoutes = (app: Express) => {
     app.get("/accessCodes", async (_, res: Response) => {
@@ -15,11 +15,11 @@ export const accessCodeRoutes = (app: Express) => {
     });
 
     app.post("/accessCodes", async (req: Request, res: Response) => {
-        const accessCodePayload: IAccessCode = {
+        const accessCodePayload: ISwitchBotLockAccessCode = {
             bookingId: req.body.bookingId,
             guestName: req.body.guestName,
             encryptedCode: "545454",
-            keypadId: "4444",
+            keypadUuid: "4444",
             status: "CREATING",
             validFrom: new Date(),
             validUntil: new Date()
