@@ -19,6 +19,16 @@ export const up: Migration = async ({context: sequelize}) => {
         name: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        created_at: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
+        },
+        updated_at: {
+            type: DataTypes.DATE,
+            allowNull: false,
+            defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
         }
     })
 }

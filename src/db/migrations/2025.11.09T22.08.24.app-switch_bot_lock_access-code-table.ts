@@ -34,13 +34,11 @@ export const up: Migration = async ({context: sequelize}) => {
         },
         valid_from: {
             type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
+            allowNull: false
         },
         valid_until: {
             type: DataTypes.DATE,
-            allowNull: false,
-            defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
+            allowNull: false
         },
         status: {
             type: DataTypes.STRING,
@@ -48,11 +46,13 @@ export const up: Migration = async ({context: sequelize}) => {
         },
         created_at: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: false,
+            defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
         },
         updated_at: {
             type: DataTypes.DATE,
-            allowNull: false
+            allowNull: false,
+            defaultValue: Sequelize.literal("CURRENT_TIMESTAMP")
         }
 
     });
