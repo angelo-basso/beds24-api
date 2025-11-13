@@ -5,7 +5,8 @@ import {
     Column,
     CreatedAt,
     DataType,
-    ForeignKey, HasMany, HasOne,
+    ForeignKey,
+    HasOne,
     Model,
     PrimaryKey,
     Table,
@@ -15,8 +16,7 @@ import {
 } from "sequelize-typescript";
 import {CreationOptional, DataTypes, InferAttributes, InferCreationAttributes} from "sequelize";
 import Beds24Property from "./beds24-property";
-import SwitchBotLockAccessCode from "./switch-bot-lock-access-code";
-import SwitchBotKeypad from "./switch_bot_keypad";
+import SwitchBotKeypad from "./switch_bot-keypad";
 
 @Table({tableName: "property-room", modelName: "Beds24PropertyRoom", schema: "beds24_entity", underscored: true})
 export default class Beds24PropertyRoom extends Model<InferAttributes<Beds24PropertyRoom>, InferCreationAttributes<Beds24PropertyRoom>> {
