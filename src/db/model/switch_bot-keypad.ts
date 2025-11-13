@@ -4,17 +4,18 @@ import {
     Column,
     CreatedAt,
     DataType,
-    ForeignKey,
+    ForeignKey, HasMany,
     Model,
     PrimaryKey,
     Table,
     UpdatedAt
 } from "sequelize-typescript";
 import {CreationOptional, DataTypes, InferAttributes, InferCreationAttributes} from "sequelize";
-import PropertyRoom from "./beds24-property-room";
+import Beds24PropertyRoom from "./beds24-property-room";
+import SwitchBotLockAccessCode from "./switch-bot-lock-access-code";
 
-@Table({tableName: "keypad", modelName: "Keypad", schema: 'switch_bot_entity', underscored: true})
-export default class Keypad extends Model<InferAttributes<Keypad>, InferCreationAttributes<Keypad>> {
+@Table({tableName: "keypad", modelName: "SwitchBotKeypad", schema: 'switch_bot_entity', underscored: true})
+export default class SwitchBotKeypad extends Model<InferAttributes<SwitchBotKeypad>, InferCreationAttributes<SwitchBotKeypad>> {
     @PrimaryKey
     @AutoIncrement
     @Column({type: DataType.UUIDV4})
@@ -28,7 +29,7 @@ export default class Keypad extends Model<InferAttributes<Keypad>, InferCreation
     @Column
     declare deviceName: string;
 
-    @ForeignKey(() => PropertyRoom)
+    @ForeignKey(() => Beds24PropertyRoom)
     @AllowNull(false)
     @Column({type: DataTypes.UUIDV4})
     declare propertyRoomUuid: string
@@ -39,8 +40,11 @@ export default class Keypad extends Model<InferAttributes<Keypad>, InferCreation
     @UpdatedAt
     declare updatedAt: CreationOptional<Date>;
 
-    @BelongsTo(()=>PropertyRoom)
-    declare propertyRoom?:InferAttributes<PropertyRoom>
+    @BelongsTo(()=>Beds24PropertyRoom)
+    declare propertyRoom?:InferAttributes<Beds24PropertyRoom>;
+
+    @HasMany(()=>SwitchBotLockAccessCode)
+    declare accessCodes?:InferAttributes<SwitchBotLockAccessCode>[];
 
     toJSON() {
         return {name: this.deviceName, propertyRoom: this.propertyRoom}

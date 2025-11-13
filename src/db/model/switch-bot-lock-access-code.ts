@@ -14,7 +14,7 @@ import {
     Validate
 } from "sequelize-typescript";
 import {CreationOptional, DataTypes, InferAttributes, InferCreationAttributes} from "sequelize";
-import Keypad from "./keypad";
+import SwitchBotKeypad from "./switch_bot_keypad";
 
 @Table({tableName: "switch_bot_lock_access_code", modelName: "SwitchBotLockAccessCode", schema: "app", underscored: true})
 export default class SwitchBotLockAccessCode extends Model<InferAttributes<SwitchBotLockAccessCode>, InferCreationAttributes<SwitchBotLockAccessCode>> {
@@ -36,7 +36,7 @@ export default class SwitchBotLockAccessCode extends Model<InferAttributes<Switc
     @Column
     declare guestName: string;
 
-    @ForeignKey(()=>Keypad)
+    @ForeignKey(()=>SwitchBotKeypad)
     @AllowNull(false)
     @Column({type:DataTypes.UUIDV4})
     declare keypadUuid: string;
@@ -63,8 +63,8 @@ export default class SwitchBotLockAccessCode extends Model<InferAttributes<Switc
     @UpdatedAt
     declare updatedAt: CreationOptional<Date>;
 
-    @BelongsTo(()=>Keypad)
-    declare keypad?:InferAttributes<Keypad>;
+    @BelongsTo(()=>SwitchBotKeypad)
+    declare keypad?:InferAttributes<SwitchBotKeypad>;
 
     toJSON(){
         return{bookingId:this.bookingId,guestName:this.guestName,validFrom:this.validFrom,validUntil:this.validUntil,status:this.status};
