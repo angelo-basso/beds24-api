@@ -10,10 +10,10 @@ import {
     Validate
 } from "sequelize-typescript";
 import {CreationOptional, InferAttributes, InferCreationAttributes} from "sequelize";
-import PropertyRoom from "./beds24-property-room";
+import Beds24PropertyRoom from "./beds24-property-room";
 
-@Table({tableName: "property", modelName: "Property", schema: "beds24_entity", underscored: true})
-export default class Property extends Model<InferAttributes<Property>, InferCreationAttributes<Property>> {
+@Table({tableName: "property", modelName: "Beds24Property", schema: "beds24_entity", underscored: true})
+export default class Beds24Property extends Model<InferAttributes<Beds24Property>, InferCreationAttributes<Beds24Property>> {
 
     @PrimaryKey
     @AutoIncrement
@@ -25,7 +25,7 @@ export default class Property extends Model<InferAttributes<Property>, InferCrea
     @Unique
     @AllowNull(false)
     @Column
-    declare id: string;
+    declare id: number;
 
     @AllowNull(false)
     @Validate({len: [1, 100]})
@@ -38,11 +38,17 @@ export default class Property extends Model<InferAttributes<Property>, InferCrea
     @UpdatedAt
     declare updatedAt: CreationOptional<Date>;
 
-    @HasMany(()=> PropertyRoom)
-    declare rooms?:InferAttributes<PropertyRoom>[];
+    @HasMany(()=> Beds24PropertyRoom)
+    declare rooms?:InferAttributes<Beds24PropertyRoom>[];
 
     toJSON(){
         return{name:this.name}
     }
 
+}
+
+export interface IBeds24Property {
+    uuid:string,
+    id:number,
+    name:string
 }
