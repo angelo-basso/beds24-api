@@ -14,7 +14,7 @@ import {
     UpdatedAt,
     Validate
 } from "sequelize-typescript";
-import {CreationOptional, DataTypes, InferAttributes, InferCreationAttributes} from "sequelize";
+import {CreationOptional, DataTypes, InferAttributes, InferCreationAttributes, NonAttribute} from "sequelize";
 import Beds24Property from "./beds24-property";
 import SwitchBotKeypad from "./switch_bot-keypad";
 
@@ -49,10 +49,10 @@ export default class Beds24PropertyRoom extends Model<InferAttributes<Beds24Prop
     declare updatedAt: CreationOptional<Date>;
 
     @BelongsTo(() => Beds24Property)
-    declare property?: InferAttributes<Beds24Property>;
+    declare property?: NonAttribute<Beds24Property>;
 
     @HasOne(()=>SwitchBotKeypad)
-    declare accessCodes?:InferAttributes<SwitchBotKeypad>;
+    declare keypad?:NonAttribute<SwitchBotKeypad>;
 
     toJSON() {
         return {name: this.name, property: this.property}
